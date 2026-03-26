@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>โครงสร้างบริหารงาน รร.ราชประชานุเคราะห์ 31</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&family=Kanit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+:root{
+  --n:#08182a;--n2:#0d2137;--n3:#122a42;
+  --bl:#1565c0;--bl2:#1976d2;--bl3:#42a5f5;
+  --go:#b8860b;--go2:#d4a017;--go3:#f0c040;
+  --si:#90a4ae;--wh:#e8f1fb;
+  --bg:#05101c;--cd:#0b1d2e;--cd2:#0e2438;
+  --br:rgba(21,101,192,0.28);--br2:rgba(21,101,192,0.5);
+  --tx:#c8dff0;--mu:#6a8ba8;
+  --re:#c62828;--te:#00695c;--am:#e65100;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Sarabun',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;}
+
+/* ── STATS BAR ── */
+.sbar{background:linear-gradient(90deg,#060f1a,var(--n2),#060f1a);
+  border-bottom:2px solid var(--go2);display:flex;justify-content:center;
+  align-items:stretch;flex-wrap:wrap;}
+.si{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:8px 24px;border-right:1px solid rgba(255,255,255,0.06);min-width:96px;}
+.si:last-child{border-right:none;}
+.sn{font-family:'Kanit',sans-serif;font-size:22px;font-weight:700;color:var(--go3);line-height:1;}
+.sl{font-size:9px;color:var(--si);margin-top:2px;letter-spacing:.5px;}
+
+/* ── HEADER ── */
+header{background:linear-gradient(135deg,var(--n) 0%,var(--n2) 60%,#091e30 100%);
+  border-bottom:2px solid var(--go2);padding:11px 16px;
+  display:flex;align-items:center;gap:12px;
+  position:sticky;top:0;z-index:300;box-shadow:0 4px 20px rgba(0,0,0,.6);}
+.emb{width:46px;height:46px;
+  background:radial-gradient(circle at 35% 35%,var(--go3),var(--go2),var(--go));
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:15px;font-weight:700;color:var(--n);flex-shrink:0;
+  box-shadow:0 0 14px rgba(212,160,23,.5);font-family:'Kanit',sans-serif;}
+.hi h1{font-family:'Kanit',sans-serif;font-size:14px;font-weight:600;color:var(--go3);line-height:1.2;}
+.hi p{font-size:10px;color:var(--si);margin-top:2px;}
+.hr{margin-left:auto;display:flex;gap:6px;align-items:center;flex-wrap:wrap;}
+
+/* ── SEARCH ── */
+.sw{position:relative;flex:0 0 185px;}
+.sw input{width:100%;padding:5px 10px 5px 26px;border-radius:16px;
+  background:rgba(255,255,255,.06);border:1px solid var(--br);
+  color:var(--tx);font-family:'Sarabun',sans-serif;font-size:10.5px;
+  outline:none;transition:border-color .2s;}
+.sw input:focus{border-color:var(--bl3);}
+.sw::before{content:'🔍';position:absolute;left:7px;top:50%;transform:translateY(-50%);font-size:9px;}
+.srd{position:absolute;top:calc(100% + 4px);left:0;right:0;
+  background:#0d2137;border:1px solid var(--br2);border-radius:9px;
+  max-height:270px;overflow-y:auto;z-index:999;display:none;
+  box-shadow:0 8px 28px rgba(0,0,0,.7);}
+.srd.open{display:block;}
+.sri{padding:8px 11px;cursor:pointer;border-bottom:1px solid rgba(255,255,255,.04);
+  transition:background .14s;}
+.sri:hover{background:rgba(21,101,192,.2);}
+.sri .sn2{font-size:10.5px;font-weight:600;color:var(--wh);}
+.sri .sr2{font-size:9.5px;color:var(--go3);}
+.sri .sp{font-size:9px;color:var(--mu);}
+.sr-none{padding:12px;text-align:center;color:var(--mu);font-size:10.5px;}
+
+/* ── BUTTONS ── */
+.btn{padding:5px 11px;border-radius:5px;border:none;cursor:pointer;
+  font-family:'Sarabun',sans-serif;font-size:10.5px;font-weight:500;
+  transition:all .17s;display:inline-flex;align-items:center;gap:4px;white-space:nowrap;}
+.bp{background:var(--bl2);color:#fff;}.bp:hover{background:var(--bl3);color:#000;}
+.bo{background:transparent;color:var(--go3);border:1px solid var(--go2);}.bo:hover{background:rgba(212,160,23,.15);}
+.bg2{background:rgba(21,101,192,.18);color:var(--bl3);border:1px solid rgba(21,101,192,.4);}.bg2:hover{background:rgba(21,101,192,.3);}
+.brd{background:var(--re);color:#fff;}.brd:hover{background:#b71c1c;}
+.bte{background:var(--te);color:#fff;}.bte:hover{background:#004d40;}
+.bam{background:var(--am);color:#fff;}.bam:hover{background:#bf360c;}
+.bsm{padding:3px 7px;font-size:9.5px;}
+.lkb{display:inline-flex;align-items:center;gap:3px;padding:3px 9px;
+  border-radius:10px;font-size:9.5px;font-weight:600;}
+.lkb.lk{background:rgba(198,40,40,.2);color:#ef9a9a;border:1px solid rgba(198,40,40,.3);}
+.lkb.ul{background:rgba(46,125,50,.2);color:#a5d6a7;border:1px solid rgba(46,125,50,.3);}
+.blkbtn{background:rgba(198,40,40,.12);color:#ef9a9a;
+  border:1px solid rgba(198,40,40,.35);}.blkbtn.ul{background:rgba(46,125,50,.12);
+  color:#a5d6a7;border-color:rgba(46,125,50,.35);}
+
+/* ── TABS ── */
+.tabs{background:var(--n3);padding:0 16px;display:flex;
+  border-bottom:1px solid var(--br);overflow-x:auto;}
+.tab{padding:10px 14px;cursor:pointer;font-size:10.5px;font-weight:500;
+  border-bottom:3px solid transparent;color:var(--mu);white-space:nowrap;transition:all .17s;}
+.tab:hover{color:var(--wh);}.tab.active{color:var(--go3);border-bottom-color:var(--go2);}
+
+/* ── MAIN ── */
+main{padding:14px 16px;max-width:1600px;margin:0 auto;}
+.cp{display:none;}.cp.active{display:block;animation:fi .28s ease;}
+@keyframes fi{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── DIRECTOR SECTION ── */
+.dw{display:flex;flex-direction:column;align-items:center;margin-bottom:5px;}
+.dc{background:linear-gradient(135deg,rgba(212,160,23,.22),rgba(212,160,23,.05));
+  border:2px solid var(--go2);border-radius:11px;padding:12px 30px;
+  text-align:center;min-width:250px;
+  box-shadow:0 0 28px rgba(212,160,23,.22);position:relative;}
+.dc .rl{font-size:9px;text-transform:uppercase;letter-spacing:2px;
+  color:var(--go2);font-weight:600;margin-bottom:3px;}
+.dc .nm{font-family:'Kanit',sans-serif;font-size:15px;font-weight:600;color:var(--wh);}
+.clv{width:2px;height:14px;background:var(--br2);margin:0 auto;}
+.dr5{display:grid;grid-template-columns:repeat(5,1fr);gap:9px;}
+
+/* ── DEPUTY CARDS ── */
+.dpc{background:rgba(21,101,192,.08);border:1px solid rgba(21,101,192,.3);
+  border-radius:8px;padding:9px 8px;text-align:center;
+  transition:all .18s;cursor:pointer;position:relative;}
+.dpc:hover{border-color:var(--bl3);background:rgba(21,101,192,.18);}
+.dpc .rl{font-size:7.5px;color:var(--si);margin-bottom:2px;
+  text-transform:uppercase;letter-spacing:.7px;}
+.dpc .nm{font-size:10.5px;font-weight:600;color:var(--wh);line-height:1.3;}
+.dpc .dp{font-size:9px;color:var(--mu);margin-top:2px;}
+.dpc .as{font-size:8px;color:rgba(144,164,174,.65);
+  margin-top:3px;padding-top:3px;
+  border-top:1px solid rgba(255,255,255,.07);line-height:1.4;}
+
+/* ── GROUP CARDS GRID ── */
+.gcg{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:10px;margin-top:12px;}
+.gc{background:var(--cd);border:1px solid var(--br);
+  border-radius:10px;overflow:hidden;position:relative;}
+.gch{padding:10px 12px;display:flex;align-items:center;gap:7px;}
+.gi{width:28px;height:28px;border-radius:6px;
+  display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;}
+.gch h3{font-size:11px;font-weight:600;color:var(--wh);flex:1;line-height:1.3;}
+.gch .ld{font-size:9px;color:var(--mu);margin-top:1px;}
+.tree{padding:0 10px 10px;}
+.tr{display:flex;align-items:flex-start;gap:4px;
+  padding:4px 5px;border-radius:4px;cursor:pointer;transition:background .13s;}
+.tr:hover{background:rgba(255,255,255,.04);}
+.tl{font-size:10.5px;color:var(--tx);flex:1;line-height:1.5;}
+.tm{font-size:9px;color:var(--bl3);margin-top:1px;}
+.tchd{margin-left:18px;border-left:1px dashed rgba(21,101,192,.28);
+  padding-left:5px;display:none;}
+.tchd.open{display:block;}
+.ttog{width:13px;height:13px;border-radius:3px;display:flex;align-items:center;
+  justify-content:center;font-size:7px;color:var(--si);flex-shrink:0;
+  background:rgba(255,255,255,.06);margin-top:3px;}
+.bdg{font-size:8px;padding:1px 5px;border-radius:7px;font-weight:500;white-space:nowrap;flex-shrink:0;}
+.bbl{background:rgba(21,101,192,.3);color:#90caf9;}
+.bgo{background:rgba(184,134,11,.22);color:var(--go3);}
+.addb{display:inline-flex;align-items:center;gap:3px;padding:3px 7px;
+  border-radius:4px;cursor:pointer;background:rgba(21,101,192,.1);
+  border:1px dashed rgba(21,101,192,.4);color:var(--bl3);font-size:9px;
+  transition:all .18s;margin-top:4px;}
+.addb:hover{background:rgba(21,101,192,.22);}
+.eib{position:absolute;top:5px;right:5px;background:rgba(21,101,192,.42);
+  border:1px solid var(--br);color:var(--si);padding:2px 5px;
+  border-radius:3px;font-size:8.5px;cursor:pointer;opacity:0;transition:opacity .18s;}
+.dc:hover .eib,.gc:hover .eib{opacity:1;}
+
+/* ── ORG CHART ── */
+#ocWrap{overflow:auto;padding:16px;min-height:600px;
+  background:rgba(0,0,0,.25);border-radius:10px;border:1px solid var(--br);
+  cursor:grab;user-select:none;}
+#ocWrap:active{cursor:grabbing;}
+#ocCanvas{position:relative;}
+.ocn{position:absolute;border-radius:8px;padding:8px 10px;text-align:center;
+  cursor:pointer;z-index:2;transition:box-shadow .18s;
+  border:1.5px solid rgba(255,255,255,.12);}
+.ocn:hover{box-shadow:0 4px 18px rgba(21,101,192,.5);}
+.ocn.dir{border:2px solid var(--go2)!important;
+  background:linear-gradient(135deg,rgba(212,160,23,.18),rgba(212,160,23,.06));
+  box-shadow:0 0 20px rgba(212,160,23,.25);}
+.ocn.dep{border-top-width:3px!important;}
+.ocn.asst{border-style:dashed;opacity:.88;}
+.ocn.grp{border-top-width:2px!important;}
+.ocn.work{opacity:.9;}
+.oc-role{font-size:7px;text-transform:uppercase;letter-spacing:1.5px;color:var(--mu);margin-bottom:2px;}
+.oc-nm{font-family:'Kanit',sans-serif;font-size:9.5px;font-weight:600;color:var(--wh);line-height:1.3;}
+.oc-sub{font-size:7.5px;color:var(--mu);margin-top:2px;line-height:1.3;}
+.oc-assts{border-top:1px solid rgba(255,255,255,.12);margin-top:5px;padding-top:4px;}
+.oc-asst-row{font-size:7px;color:rgba(144,164,174,.8);line-height:1.5;}
+svg.oc-svg{position:absolute;top:0;left:0;pointer-events:none;z-index:1;overflow:visible;}
+
+/* ── POPUP / MODAL ── */
+.pov{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:400;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .22s;}
+.pov.open{opacity:1;pointer-events:all;}
+.pb{background:#0d2137;border:1px solid var(--br2);border-radius:13px;
+  padding:20px;min-width:320px;max-width:500px;width:90%;max-height:80vh;
+  overflow-y:auto;transform:scale(.94);transition:transform .22s;
+  box-shadow:0 20px 56px rgba(0,0,0,.7);}
+.pov.open .pb{transform:scale(1);}
+.pb h3{font-size:12.5px;font-weight:600;color:var(--wh);margin-bottom:3px;}
+.pb .sub{font-size:10px;color:var(--mu);margin-bottom:11px;}
+.chip{display:inline-block;padding:3px 7px;border-radius:13px;
+  background:rgba(21,101,192,.2);border:1px solid var(--br);
+  font-size:10px;color:var(--tx);margin:2px;}
+.chip.h{background:rgba(184,134,11,.2);border-color:var(--go2);color:var(--go3);}
+.mov{position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:500;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .2s;}
+.mov.open{opacity:1;pointer-events:all;}
+.mb{background:#0f2540;border:1px solid var(--br2);border-radius:12px;
+  padding:20px;width:90%;max-width:440px;max-height:84vh;overflow-y:auto;
+  transform:translateY(16px);transition:transform .22s;
+  box-shadow:0 24px 60px rgba(0,0,0,.8);}
+.mov.open .mb{transform:translateY(0);}
+.mt{font-size:12.5px;font-weight:600;color:var(--wh);margin-bottom:13px;}
+label{font-size:9.5px;color:var(--si);display:block;margin-bottom:2px;}
+input,textarea,select{width:100%;padding:7px 9px;border-radius:5px;
+  background:rgba(255,255,255,.06);border:1px solid var(--br);
+  color:var(--tx);font-family:'Sarabun',sans-serif;font-size:10.5px;
+  margin-bottom:9px;outline:none;transition:border-color .17s;}
+input:focus,textarea:focus,select:focus{border-color:var(--bl3);}
+textarea{resize:vertical;min-height:55px;}
+.mft{display:flex;gap:6px;justify-content:flex-end;margin-top:4px;}
+.toast{position:fixed;bottom:16px;right:16px;background:#0f2540;
+  border:1px solid var(--te);color:#80cbc4;padding:8px 14px;
+  border-radius:6px;font-size:10.5px;z-index:600;
+  transform:translateY(48px);opacity:0;transition:all .27s;}
+.toast.show{transform:translateY(0);opacity:1;}
+.hl{background:rgba(240,192,64,.17)!important;border-color:var(--go3)!important;}
+
+/* ── EXPORT PANEL ── */
+.exp-panel{background:var(--cd2);border:1px solid var(--br);
+  border-radius:10px;padding:18px;margin-top:14px;}
+.exp-panel h3{font-family:'Kanit',sans-serif;font-size:14px;color:var(--go3);margin-bottom:12px;}
+.exp-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px;}
+.exp-card{background:var(--cd);border:1px solid var(--br);border-radius:8px;
+  padding:14px;display:flex;flex-direction:column;gap:8px;}
+.exp-card .title{font-size:11px;font-weight:600;color:var(--wh);}
+.exp-card .desc{font-size:9.5px;color:var(--mu);line-height:1.4;}
+
+/* ── SETTINGS ── */
+.settings-box{max-width:420px;margin:18px auto;
+  background:var(--cd2);border:1px solid var(--br);border-radius:11px;padding:22px;}
+
+/* ── DEPT BORDERS ── */
+.d-general{border-top:3px solid #1565c0;}
+.d-plan{border-top:3px solid #b8860b;}
+.d-person{border-top:3px solid #2e7d32;}
+.d-academic{border-top:3px solid #6a1b9a;}
+.d-student{border-top:3px solid #c62828;}
+
+/* ── PRINT ── */
+@media print{
+  header,.tabs,.hr,.btn,.addb,.eib,.pov,.mov,.toast,#lkMod,
+  .sbar,.exp-panel,.settings-box{display:none!important;}
+  body{background:#fff!important;color:#000!important;}
+  .dc,.gc,.dpc{background:#fff!important;border-color:#ccc!important;box-shadow:none!important;}
+  .dc .nm,.oc-nm,.gch h3,.tl{color:#000!important;}
+  main{padding:0!important;}.cp{display:block!important;}
+}
+::-webkit-scrollbar{width:4px;height:4px;}
+::-webkit-scrollbar-thumb{background:var(--br2);border-radius:2px;}
+@media(max-width:768px){
+  .dr5{grid-template-columns:repeat(2,1fr);}
+  .gcg{grid-template-columns:1fr;}
+  .sw{flex:0 0 130px;}
+  .si{padding:7px 12px;min-width:72px;}
+  .sn{font-size:17px;}
+}
+</style>
+</head>
+<body>
+
+<!-- ── STATS BAR ── -->
+<div class="sbar">
+  <div class="si"><div class="sn">1</div><div class="sl">ผู้อำนวยการ</div></div>
+  <div class="si"><div class="sn">5</div><div class="sl">กลุ่มบริหาร</div></div>
+  <div class="si"><div class="sn" id="s-grp">-</div><div class="sl">กลุ่มงาน</div></div>
+  <div class="si"><div class="sn" id="s-wrk">-</div><div class="sl">งาน</div></div>
+  <div class="si"><div class="sn" id="s-per">-</div><div class="sl">บุคลากร</div></div>
+</div>
+
+<!-- ── HEADER ── -->
+<header>
+  <div class="emb">ร31</div>
+  <div class="hi">
+    <h1>โรงเรียนราชประชานุเคราะห์ 31 จังหวัดเชียงใหม่</h1>
+    <p>ระบบโครงสร้างการบริหารงาน • คำสั่งที่ 247/2568 • ปีการศึกษา 2569</p>
+  </div>
+  <div class="hr">
+    <div class="sw">
+      <input id="si-inp" type="text" placeholder="ค้นหาบุคลากร / งาน..."
+        oninput="doSearch(this.value)" onfocus="doSearch(this.value)"
+        onblur="setTimeout(()=>hideSR(),230)">
+      <div class="srd" id="srd"></div>
+    </div>
+    <span class="lkb lk" id="lkBdg">🔒 ล็อค</span>
+    <button class="btn blkbtn" id="lkBtn" onclick="togLock()">🔑 แก้ไข</button>
+    <button class="btn bo" onclick="swTK('export')">📤 Export</button>
+    <button class="btn bo" onclick="doPrint()">🖨️ พิมพ์</button>
+    <button class="btn bsm" style="background:rgba(255,255,255,.06);color:var(--mu);"
+      onclick="resetDef()" title="รีเซ็ต">↺</button>
+    <input type="file" id="fi" accept=".json" style="display:none" onchange="doImp(this)">
+  </div>
+</header>
+
+<!-- ── ADMIN LOGIN MODAL ── -->
+<div class="mov" id="lkMod">
+  <div class="mb" onclick="event.stopPropagation()">
+    <div class="mt">🔐 เข้าสู่ระบบ Admin</div>
+    <label>รหัสผ่าน Administrator</label>
+    <input type="password" id="pwI" placeholder="กรอกรหัสผ่าน"
+      onkeydown="if(event.key==='Enter')chkPw()">
+    <div id="pwE" style="color:#ef9a9a;font-size:9.5px;margin-top:-6px;
+      margin-bottom:8px;display:none;">รหัสผ่านไม่ถูกต้อง</div>
+    <div style="display:flex;gap:7px;justify-content:flex-end;">
+      <button class="btn bo bsm" onclick="closeLkMod()">ยกเลิก</button>
+      <button class="btn bp bsm" onclick="chkPw()">เข้าสู่ระบบ</button>
+    </div>
+    <div style="margin-top:10px;padding:8px;background:rgba(255,255,255,.04);
+      border-radius:5px;font-size:9.5px;color:var(--mu);">
+      💡 รหัสผ่าน Admin เริ่มต้น: <b style="color:var(--go3)">rp31admin</b>
+      &nbsp;|&nbsp; เปลี่ยนได้ใน Settings
+    </div>
+  </div>
+</div>
+
+<!-- ── TABS ── -->
+<div class="tabs">
+  <div class="tab active" onclick="swT('overview',this)">🏠 ภาพรวม</div>
+  <div class="tab" onclick="swT('orgchart',this)">🗂️ Org Chart</div>
+  <div class="tab" onclick="swT('general',this)">🏫 ทั่วไป</div>
+  <div class="tab" onclick="swT('plan',this)">📊 แผนงานฯ</div>
+  <div class="tab" onclick="swT('person',this)">👥 บุคคล</div>
+  <div class="tab" onclick="swT('academic',this)">📚 วิชาการ</div>
+  <div class="tab" onclick="swT('student',this)">🎓 กิจการนักเรียน</div>
+  <div class="tab" onclick="swT('export',this)">📦 Export / พิมพ์</div>
+  <div class="tab" onclick="swT('settings',this)">⚙️ Settings</div>
+</div>
+
+<main>
+  <!-- DIRECTOR -->
+  <div class="dw">
+    <div class="dc">
+      <div class="rl">ผู้อำนวยการโรงเรียน</div>
+      <div class="nm" id="dirNm"></div>
+      <button class="eib" onclick="edDir()">✏️</button>
+    </div>
+    <div class="clv"></div>
+    <div class="dr5" id="depRow"></div>
+  </div>
+
+  <!-- PANELS -->
+  <div class="cp active" id="cp-overview"></div>
+  <div class="cp" id="cp-orgchart">
+    <div style="display:flex;align-items:center;gap:8px;margin:12px 0 9px;flex-wrap:wrap;">
+      <h2 style="font-family:'Kanit',sans-serif;font-size:15px;color:var(--go3)">🗂️ แผนผังองค์กร</h2>
+      <select id="ocd" onchange="buildOC()" style="width:auto;margin:0;padding:4px 7px;font-size:10.5px;">
+        <option value="2">ผอ. → รองผอ. (+ ผช.ผอ.) → กลุ่มงาน</option>
+        <option value="3" selected>ทุกระดับถึงงาน</option>
+      </select>
+      <select id="ocf" onchange="buildOC()" style="width:auto;margin:0;padding:4px 7px;font-size:10.5px;">
+        <option value="all">ทุกกลุ่มบริหาร</option>
+        <option value="general">ทั่วไป</option>
+        <option value="plan">แผนงานฯ</option>
+        <option value="person">บุคคล</option>
+        <option value="academic">วิชาการ</option>
+        <option value="student">กิจการนักเรียน</option>
+      </select>
+      <button class="btn bsm bo" onclick="document.getElementById('ocWrap').scrollTo({top:0,left:0,behavior:'smooth'})">🔄 รีเซ็ต</button>
+      <button class="btn bsm bg2" onclick="exportOCPng()">🖼️ บันทึกรูป</button>
+    </div>
+    <div id="ocWrap"><div id="ocCanvas"></div></div>
+  </div>
+
+  <div class="cp" id="cp-general"></div>
+  <div class="cp" id="cp-plan"></div>
+  <div class="cp" id="cp-person"></div>
+  <div class="cp" id="cp-academic"></div>
+  <div class="cp" id="cp-student"></div>
+
+  <!-- EXPORT PANEL -->
+  <div class="cp" id="cp-export">
+    <div class="exp-panel">
+      <h3>📦 Export และพิมพ์เอกสาร</h3>
+      <div class="exp-grid">
+        <div class="exp-card">
+          <div class="title">📊 Excel - ตารางทุกกลุ่มบริหาร</div>
+          <div class="desc">สร้างไฟล์ Excel ครบทุก 5 กลุ่มบริหาร พร้อมแผ่นสรุปและสถิติ</div>
+          <button class="btn bte" onclick="exportAllExcel()">📥 Download Excel</button>
+        </div>
+        <div class="exp-card">
+          <div class="title">📄 Excel - ตารางกลุ่มบริหารที่เลือก</div>
+          <div class="desc">เลือกกลุ่มบริหารที่ต้องการ แล้ว export เป็น Excel เฉพาะกลุ่มนั้น</div>
+          <select id="expDeptSel" style="margin-bottom:6px;font-size:10px;">
+            <option value="all">ทุกกลุ่ม</option>
+            <option value="general">กลุ่มบริหารงานทั่วไป</option>
+            <option value="plan">กลุ่มบริหารแผนงานและงบประมาณ</option>
+            <option value="person">กลุ่มบริหารงานบุคคล</option>
+            <option value="academic">กลุ่มบริหารงานวิชาการ</option>
+            <option value="student">กลุ่มบริหารงานกิจการนักเรียน</option>
+          </select>
+          <button class="btn bte" onclick="exportSelectedExcel()">📥 Download Excel</button>
+        </div>
+        <div class="exp-card">
+          <div class="title">🖼️ Org Chart - บันทึกรูปภาพ</div>
+          <div class="desc">บันทึก Org Chart เป็นไฟล์รูปภาพ PNG</div>
+          <select id="expOCFilt" style="margin-bottom:6px;font-size:10px;">
+            <option value="all">ทุกกลุ่มบริหาร</option>
+            <option value="general">ทั่วไป</option>
+            <option value="plan">แผนงานฯ</option>
+            <option value="person">บุคคล</option>
+            <option value="academic">วิชาการ</option>
+            <option value="student">กิจการนักเรียน</option>
+          </select>
+          <button class="btn bam" onclick="exportOCPngFromPanel()">🖼️ บันทึก PNG</button>
+        </div>
+        <div class="exp-card">
+          <div class="title">🖨️ พิมพ์ตาราง</div>
+          <div class="desc">พิมพ์ข้อมูลโครงสร้างออกเป็นเอกสาร</div>
+          <select id="printDeptSel" style="margin-bottom:6px;font-size:10px;">
+            <option value="all">ทุกกลุ่ม</option>
+            <option value="general">กลุ่มบริหารงานทั่วไป</option>
+            <option value="plan">กลุ่มบริหารแผนงานและงบประมาณ</option>
+            <option value="person">กลุ่มบริหารงานบุคคล</option>
+            <option value="academic">กลุ่มบริหารงานวิชาการ</option>
+            <option value="student">กลุ่มบริหารงานกิจการนักเรียน</option>
+          </select>
+          <button class="btn bp" onclick="doPrintDept()">🖨️ พิมพ์</button>
+        </div>
+        <div class="exp-card">
+          <div class="title">💾 Backup ข้อมูล (JSON)</div>
+          <div class="desc">บันทึกข้อมูลทั้งหมดเป็นไฟล์ JSON สำหรับสำรองหรือย้ายข้อมูล</div>
+          <button class="btn bg2" onclick="doExp()">📥 Export JSON</button>
+        </div>
+        <div class="exp-card">
+          <div class="title">📤 Import ข้อมูล (JSON)</div>
+          <div class="desc">นำเข้าข้อมูลจากไฟล์ JSON ที่บันทึกไว้</div>
+          <button class="btn bg2" onclick="document.getElementById('fi').click()">📤 Import JSON</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SETTINGS PANEL -->
+  <div class="cp" id="cp-settings">
+    <div class="settings-box">
+      <h2 style="font-family:'Kanit',sans-serif;font-size:15px;color:var(--go3);margin-bottom:16px;">⚙️ ตั้งค่าระบบ</h2>
+      <label>รหัสผ่าน Admin ปัจจุบัน</label>
+      <input type="password" id="pwO" placeholder="รหัสผ่านปัจจุบัน">
+      <label>รหัสผ่านใหม่</label>
+      <input type="password" id="pwN" placeholder="รหัสผ่านใหม่ (อย่างน้อย 4 ตัวอักษร)">
+      <label>ยืนยันรหัสผ่านใหม่</label>
+      <input type="password" id="pwC" placeholder="ยืนยันรหัสผ่านใหม่">
+      <div id="pwM" style="font-size:9.5px;margin-bottom:9px;display:none;"></div>
+      <button class="btn bp" onclick="chgPw()">🔐 เปลี่ยนรหัสผ่าน</button>
+      <hr style="border-color:var(--br);margin:16px 0;">
+      <div style="font-size:10px;color:var(--mu);">
+        <b style="color:var(--tx)">Storage:</b> ข้อมูลบันทึกใน localStorage<br>
+        ใช้ Export JSON สำรองข้อมูล และ Import JSON เพื่อกู้คืน<br><br>
+        <b style="color:var(--tx)">Admin Access:</b> ต้องล็อกอิน Admin จึงจะสามารถแก้ไข เพิ่ม หรือลบข้อมูลได้
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- POPUP: members -->
+<div class="pov" id="mpop" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="pb">
+    <h3 id="pt"></h3><div class="sub" id="ps"></div><div id="pm"></div>
+    <div style="margin-top:11px;text-align:right">
+      <button class="btn bo bsm" onclick="document.getElementById('mpop').classList.remove('open')">ปิด</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: edit -->
+<div class="mov" id="em" onclick="if(event.target===this)closeMod()">
+  <div class="mb" onclick="event.stopPropagation()">
+    <div class="mt" id="emT"></div><div id="emB"></div>
+    <div class="mft">
+      <button class="btn bo bsm" onclick="closeMod()">ยกเลิก</button>
+      <button class="btn bte bsm" onclick="savMod()">💾 บันทึก</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ══ DATA ══════════════════════════════════════════════════════════════ */
+const DF={director:"นายชยุต  ข่าขันมะลี",departments:{
+general:{name:"กลุ่มบริหารงานทั่วไป",color:"#1565c0",icon:"🏫",deputy:"นางเกวลิน  นันตา",
+  assistants:["นายลิปปกร  เหมืองค้า","นายวีรวิชญ์  สถิตท่าผาพัฒนา"],
+  groups:[
+    {name:"กลุ่มงานอาคารสถานที่",head:"นายภูวิศ  มณี",deputy:"นายจารุกิตติ์  วงศ์ทวี",works:[
+      {name:"งานอาคารสถานที่",head:"นายลิปปกร  เหมืองค้า",members:["นายภูวิศ  มณี"]},
+      {name:"งานปรับปรุงซ่อมแซม",head:"นายภูวิศ  มณี",members:["นายเกรียงไกร  ปันดอน","นายจารุกิตติ์  วงค์ทวี","นายอรรถวุฒิ  แสงบุญ","นายกวีวัฒน์  ล้ำสัน"]},
+      {name:"งานระบบน้ำและประปา",head:"นายวุฒิพงษ์  สกุลประกายพร",members:["นายอรรถวุฒิ  แสงบุญ","นายกวีวัฒน์  ล้ำสัน"]},
+      {name:"งานระบบไฟฟ้า",head:"นายเกรียงไกร  ปันดอน",members:["นายอรรถวุฒิ  แสงบุญ","นายกวีวัฒน์  ล้ำสัน"]},
+      {name:"งานก่อสร้างอาคาร",head:"นายลิปปกร  เหมืองค้า",members:["นายภูวิศ  มณี","นายจารุกิตติ์  วงศ์ทวี","นายเกรียงไกร  ปันดอน"]},
+      {name:"งานบริการอาคาร-สถานที่",head:"ว่าที่ร้อยตรีนรินทร์  ศรีบุญเรือง",members:["นายกวีวัฒน์  ล้ำสัน"]},
+      {name:"งานโสตทัศนูปกรณ์",head:"ว่าที่ร้อยตรีพุฒิพงษ์  สุขป้อม",members:["นางสาวพัทรศยา  ปิงยศ","นางสาวนภาพัฏพ์  วงศ์กัน","นายภัทร  ตั๋นแก้ว","นางสาวเมลาณี  บังคมเนตร"]}
+    ]},
+    {name:"กลุ่มงานอำนวยการและบริการ",head:"นายวีรวิชญ์  สถิตท่าผาพัฒนา",deputy:"นายจารุกิตติ์  วงศ์ทวี",works:[
+      {name:"งานสารสนเทศ",head:"นางสาวพัชร์ธีรัตน์  ชูไกรทอง",members:["นางสาวณัฐธิดา  แก้วคำศรี"]},
+      {name:"งานประชาสัมพันธ์",head:"นายภัทร  ตั๋นแก้ว",members:["นางสาวเมลาณี  บังคมเนตร","นางสาวพัทรศยา  ปิงยศ","นายศักดิ์สิทธิ์  สุวรรณศรี"]},
+      {name:"งานพิธีกรและพิธีการ",head:"นางสาวจีรนันท์  อนุรักษ์ธานี",members:["นายธีรเทพ  นฤมิตรเมธานนท์","นางสาวสุภาพร  รังสรรค์เพิ่มบุญ"]},
+      {name:"งานคณะกรรมการสถานศึกษา",head:"นางสาวศิริวรรณ  มุนินคำ",members:["นายอัญชฎา  นะที","นายประวิทย์  เสาร์นุ"]},
+      {name:"งานเวรยามรักษาความปลอดภัย",head:"นายศุภากร  ทาอวน",members:["นายจารุกิตติ์  วงศ์ทวี","นายนิพนธ์  บุญรัง"]},
+      {name:"งานยานพาหนะ",head:"นายวีรวิชญ์  สถิตท่าผาพัฒนา",members:["คณะครูบุคลากร"]},
+      {name:"งานภูมิทัศน์และสภาพแวดล้อม",head:"นายศุภากร  ทาอวน",members:["นายน่านมงคล  อินด้วง","นายรัตนวัชร์  เลิศนันทรัตน์","นายเชิดชู  ดำรงเกียรติพนา"]},
+      {name:"งานสัมพันธ์ชุมชน",head:"ว่าที่ร้อยตรีนรินทร์  ศรีบุญเรือง",members:["นายวีรวิชญ์  สถิตท่าผาพัฒนา","นายวุฒิพงษ์  สกุลประกายพร"]},
+      {name:"งานสถานศึกษาปลอดภัย",head:"นายวีรวิชญ์  สถิตท่าผาพัฒนา",members:["คณะครูและบุคลากรทุกคน"]},
+      {name:"งานธุรการโรงเรียน",head:"นายอัญชฎา  นะที",members:["นางสาวศิริวรรณ  มุนินคำ"]}
+    ]}
+  ]},
+plan:{name:"กลุ่มบริหารแผนงานและงบประมาณ",color:"#b8860b",icon:"📊",deputy:"นางเกวลิน  นันตา",
+  assistants:["นางสาวจริญญา  เทพอินทร์","นางสาวศิริกาญจน์  อิ่นใจ"],
+  groups:[
+    {name:"กลุ่มแผนงาน",head:"นางสาวจริญญา  เทพอินทร์",deputy:"นายนิพนธ์  จูเรือน",works:[
+      {name:"1.1 งานแผนงานโรงเรียน",head:"นางสาวจริญญา  เทพอินทร์",members:["นางสาวกันจารัตน์  ใจหาญ","นางสาวกัลยา  ใจมา","แผนงานแต่ละกลุ่มงาน"]},
+      {name:"1.2 งานสารสนเทศโรงเรียน",head:"นางสาวกันจารัตน์  ใจหาญ",members:["นางสาวกัลยา  ใจมา","สารสนเทศแต่ละกลุ่มงาน"]},
+      {name:"1.3 งานระบบควบคุมภายใน",head:"นายนิพนธ์  จูเรือน",members:["นางสาวจริญญา  เทพอินทร์","นางสาวกันจารัตน์  ใจหาญ"]},
+      {name:"1.4 งานธุรการ",head:"นางสาววิชญาดา  ทิพย์กันธา",members:["นางสาวกัลยา  ใจมา"]},
+      {name:"1.5 งานแผนงานและสารสนเทศ",head:"นางสาวกันจารัตน์  ใจหาญ",members:["นายบดินทร์  สุขใจ"]},
+      {name:"1.6 พัสดุกลุ่ม",head:"นางสาวมนัสวี  ล่ำสัน",members:["นายบดินทร์  สุขใจ"]},
+      {name:"1.7 งานนิเทศ กำกับ ติดตาม",head:"นางเกวลิน  นันตา",members:[]}
+    ]},
+    {name:"กลุ่มงานงบประมาณ",head:"นางสาวศิริกาญจน์  อิ่นใจ",deputy:"นางสาวมนัสวี  ล่ำสัน",works:[
+      {name:"1.1 งานการเงิน",head:"นางสาวศิริกาญจน์  อิ่นใจ",members:["นางสาวภาติยา  ภักดี","นางภัควลัญชญ์  พลเมฆ","นางสาวกัลยา  ใจมา"]},
+      {name:"1.2 งานบัญชี",head:"นางสาวสุนันท์  อนันต์พิศาล",members:["นางสาวกัลยา  ใจมา","นางภัควลัญชญ์  พลเมฆ","นางสาวภาติยา  ภักดี"]},
+      {name:"1.3 พัสดุและสินทรัพย์",head:"นางสาวศิริกาญจน์  อิ่นใจ",members:["นางสาวมนัสวี  ล่ำสัน","นายนิพนธ์  จูเรือน","นายบดินทร์  สุขใจ","นางสาวพัชรมัย  ไกรเสน"]},
+      {name:"1.4 งานโภชนาการ",head:"นางสาววรรศิกา  แก้วมา",members:["นางสาววิชญาดา  ทิพย์กันธา","นางสาวชมพูนุช  อุปภัมภ์","นางสาวกัลยา  ใจมา"]},
+      {name:"1.5 ปฏิคมและต้อนรับ",head:"นางสาวชมพูนุช  อุปภัมภ์",members:["นายอัญชฏา  นที","นางสาวธิดารัตน์  ราชสิงห์"]},
+      {name:"1.5 งานธุรการ",head:"นางสาวพัชรมัย  ไกรเสน",members:["นายบดินทร์  สุขใจ","นางภัควลัญชญ์  พลเมฆ"]},
+      {name:"1.6 งานนิเทศ กำกับ ติดตาม",head:"นางเกวลิน  นันตา",members:[]}
+    ]}
+  ]},
+person:{name:"กลุ่มบริหารงานบุคคล",color:"#2e7d32",icon:"👥",deputy:"นางสาววรันทร  มะณี",
+  assistants:["นางพิกุล  เหมืองค้า"],
+  groups:[
+    {name:"กลุ่มงานบุคคล",head:"นางสาวสกาวนภา  แสนใหม่",deputy:"",works:[
+      {name:"งานวางแผนอัตรากำลัง",head:"นางสาววรันทร  มะณี",members:["นางพิกุล  เหมืองค้า"]},
+      {name:"งานสรรหา บรรจุแต่งตั้ง",head:"นางสาววรันทร  มะณี",members:["นางพิกุล  เหมืองค้า"]},
+      {name:"งานย้าย โอนและออกจากราชการ",head:"นางสาววรันทร  มะณี",members:["นางพิกุล  เหมืองค้า"]},
+      {name:"งานประเมินผลการปฏิบัติงาน",head:"นางสาววรันทร  มะณี",members:["นางพิกุล  เหมืองค้า","นางสาวสกาวนภา  แสนใหม่"]},
+      {name:"งานประเมินวิทยฐานะ DPA",head:"นางสาววรันทร  มะณี",members:["นางสาวสกาวนภา  แสนใหม่"]},
+      {name:"งานทะเบียนประวัติ",head:"นายวันชัย  มนตรีกฤษ์",members:["นางสาวนภัสรพี  ตระกูลวิจิตร์"]},
+      {name:"งานวินัย รักษาวินัย",head:"นายวันชัย  มนตรีกฤษ์",members:[]},
+      {name:"งานส่งเสริมมาตรฐานวิชาชีพ",head:"นายวันชัย  มนตรีกฤษ์",members:[]},
+      {name:"งานเครื่องราชอิสริยาภรณ์",head:"นางสาวสกาวนภา  แสนใหม่",members:[]},
+      {name:"งานส่งเสริมพัฒนาบุคลากร",head:"นางสาวสกาวนภา  แสนใหม่",members:[]},
+      {name:"งานสวัสดิการข้าราชการครู",head:"นางสาวสกาวนภา  แสนใหม่",members:["นางสาวศศิธร  ผูกพันธ์นวคุณ"]},
+      {name:"งานธุรการกลุ่มบุคคล",head:"นางสาวศศิธร  ผูกพันธ์นวคุณ",members:[]},
+      {name:"งานแผนงานกลุ่มบุคคล",head:"นางสาวจิรัชญา  ชัยธีรธรรม",members:[]}
+    ]}
+  ]},
+academic:{name:"กลุ่มบริหารงานวิชาการ",color:"#6a1b9a",icon:"📚",deputy:"นายชาญยุทธ  สุทธิธรานนท์",
+  assistants:["นางสาวณัฐธนัญา  บุญถึง","นางอมลสิริ  คำฟู","นางสาววรรณภรณ์  ทิพย์สอน","นางสาวรัตติกาล  ยศสุข"],
+  groups:[
+    {name:"กลุ่มงานวิชาการ",head:"นางสาวพิมพ์ลดา  ศรีพันธ์",deputy:"นางณัฐฐินันท์  น้อยมา",works:[
+      {name:"งานพัฒนาหลักสูตรสถานศึกษา",head:"นางสาวพิมพ์ลดา  ศรีพันธ์",members:["นายชลวิทย์  วรรณภา"]},
+      {name:"งานจัดการเรียนรู้",head:"นางสาวณัฐธนัญา  บุญถึง",members:["หัวหน้ากลุ่มสาระทุกกลุ่ม"]},
+      {name:"งานทะเบียนวัดผล",head:"นางสาวรัตนา  โยธา",members:["นางสาวพัทรศยา  ปิงยศ","นายวทัญญู  จินาตอง"]},
+      {name:"งาน AI Club",head:"นางสาวเมลาณี  บังคมเนตร",members:["นางสาวนภาพัฏพ์  วงศ์กัน","นางสาวพัทรศยา  ปิงยศ"]},
+      {name:"งานบูรณาการฐานสมรรถนะ",head:"นางสาวณัฐธนัญา  บุญถึง",members:["นายวทัญญู  จินาตอง"]},
+      {name:"งานพัฒนาแหล่งเรียนรู้",head:"นายรัตนวัชร์  เลิศนันทรัตน์",members:["นางสาวพิมพ์ลดา  ศรีพันธ์","นางสาวสโรชา  เชาวนะ"]},
+      {name:"งานวิจัยเพื่อพัฒนาคุณภาพ",head:"นางสาวณัฐธนัญา  บุญถึง",members:["นางอมลสิริ  คำฟู","นางสาวจุฑามาศ  มังคลาด"]},
+      {name:"งานประกันคุณภาพการศึกษา",head:"นางสาวกันจารัตน์  ใจหาญ",members:["นางสาวราตรี  มีชัย","นางสาวจีรนันท์  อนุรักษ์ธานี","นางสาวสุพรรณิกา  กุออ"]},
+      {name:"งานธุรการสารบรรณวิชาการ",head:"นางสาวนฤมล  เทพปณะ",members:[]},
+      {name:"งานพัสดุวิชาการ",head:"นางสาวพัชรมัย  ไกรเสน",members:["นางณัฐฐินันท์  น้อยมา"]}
+    ]},
+    {name:"กลุ่มงานส่งเสริมวิชาการ",head:"นายรัตนวัชร์  เลิศนันทรัตน์",deputy:"",works:[
+      {name:"1. งานแนะแนวทางการศึกษา",head:"นางสาววันวิสาข์  อินทวงค์",members:["นางสาวรัตติกาล  ยศสุข","นางสาวสุชาดา  ดาเลา","นางสาวสุมาลี  กมลรักสันติ"]},
+      {name:"2.1 กิจกรรมลูกเสือ-เนตรนารี",head:"ว่าที่ร้อยตรีนรินทร์  ศรีบุญเรือง",members:[]},
+      {name:"2.2.1 ลูกเสือสำรอง",head:"นายนิทัศน์  อินถานันท์",members:["ผู้กำกับ รองผู้กำกับลูกเสือสำรอง"]},
+      {name:"2.2.2 ลูกเสือสามัญ",head:"นายบุญเสริฐ  จตุรธรรมวาที",members:["ผู้กำกับ รองผู้กำกับลูกเสือสามัญ"]},
+      {name:"2.2.3 ลูกเสือสามัญรุ่นใหญ่ ม.1",head:"นายพุฒิพงษ์  สุขป้อม",members:["ผู้กำกับ รองผู้กำกับ ม.1"]},
+      {name:"2.2.4 ลูกเสือสามัญรุ่นใหญ่ ม.2",head:"นางสาวจันจิรา  ธนันชัย",members:["ผู้กำกับ รองผู้กำกับ ม.2"]},
+      {name:"2.2.5 ลูกเสือสามัญรุ่นใหญ่ ม.3",head:"นางสาวอาภาภรณ์  สอนประเสริฐ",members:["ผู้กำกับ รองผู้กำกับ ม.3"]},
+      {name:"2.2.6 ลูกเสือวิสามัญ ม.4",head:"นางสาวจันทร์ศิริ  คีรีรังสี",members:["ผู้กำกับ รองผู้กำกับ ม.4"]},
+      {name:"2.2.7 ลูกเสือวิสามัญ ม.5",head:"นางสาวศิริกาญจน์  อิ่นใจ",members:["ผู้กำกับ รองผู้กำกับ ม.5"]},
+      {name:"2.2.8 ลูกเสือวิสามัญ ม.6",head:"นางสาวสกาวนภา  แสนใหม่",members:["ผู้กำกับ รองผู้กำกับ ม.6"]},
+      {name:"2.2.9 ลูกเสือ กกต./ต้านยาเสพติด",head:"นายรัตนวัชร์  เลิศนันทรัตน์",members:["ลูกเสือ กกต."]},
+      {name:"2.2.10 ลูกเสือราชประชา",head:"ว่าที่ร้อยตรีนรินทร์  ศรีบุญเรือง",members:["ลูกเสือราชประชาฯ"]},
+      {name:"2.3 กิจกรรมนักศึกษาวิชาทหาร",head:"ว่าที่ร้อยตรีธนวัฒน์  ฟองตา",members:["นายน่านมงคล  อินด้วง","ว่าที่ร้อยตรีสมพงษ์  ตระการศุภกร","ว่าที่ ร.ต.หญิงอรวรรณ  เมืองแก้ว","นางสาวณัฐธิดา  แก้วคำศรี"]},
+      {name:"3.1 กิจกรรมทัศนศึกษา",head:"นางลักษณา  ไชยบุตร",members:["นางสาวจริญญา  เทพอินทร์","คณะครูที่ปรึกษาทุกระดับชั้น"]},
+      {name:"3.2 แข่งขันทักษะวิชาการ",head:"นางสาวมนัสวี  ล่ำสัน",members:["นางสาวพัชรญดา  โอบเอื้อ"]},
+      {name:"3.3 สวนพฤกษศาสตร์โรงเรียน",head:"นายปรเมษฐ์  สุโรพันธ์",members:["คณะครูกลุ่มสาระวิทยาศาสตร์"]},
+      {name:"3.4 พัฒนาสื่อเทคโนโลยีและนวัตกรรม",head:"ว่าที่ร้อยตรีสมพงษ์  ตระการศุภกร",members:["นางสาวกัลยา  ใจมา"]},
+      {name:"3.5 โครงการ ทสรช.",head:"นางสาวนภาพัฎพ์  วงศ์กัน",members:["ว่าที่ร้อยตรีสมพงษ์  ตระการศุภกร","นายภัทร  ตั๋นแก้ว","นางสาวเมลาณี  บังคมเนตร"]},
+      {name:"3.6 มูลนิธิ DLTV",head:"ว่าที่ร้อยตรีสมพงษ์  ตระการศุภกร",members:["นางสาวนภาพัฏพ์  วงศ์กัน","นายภัทร  ตั๋นแก้ว"]},
+      {name:"3.7 งาน ศรร.",head:"นายน่านมงคล  อินด้วง",members:["นายเชิดชู  ดำรงเกียรติพนา","นายพิพัฒน์  โพธิ์คุ้มภัย","นายภูรินทร์  สมบูรณ์พูนเพิ่ม"]},
+      {name:"3.8 บ้านวิทยาศาสตร์น้อย",head:"นางอมลสิริ  คำฟู",members:["นายนิพนธ์  จูเรือน","นางสาวนภาพัฎพ์  วงศ์กัน"]},
+      {name:"3.9 งานจินตคณิต",head:"นางสาวจริญญา  เทพอินทร์",members:["ครูผู้สอนชั้นประถมศึกษาทุกคน"]},
+      {name:"4.1 งานโรงเรียนพี่โรงเรียนน้อง",head:"นางบุญจันทร์  สิทธิประภา",members:["นายปรเมษฐ์  สุโรพันธ์"]},
+      {name:"4.2 งานห้องเรียนคุณภาพ",head:"นางสาวจิราภรณ์  โสภะถา",members:["ว่าที่ร้อยตรีหญิงนันท์นภัส  ยินดีพิพัฒน์"]},
+      {name:"5. งานแผนปฏิบัติการและสารสนเทศ",head:"นางณัฐฐินันท์  น้อยมา",members:["นางสาวจีรนันท์  อนุรักษ์ธานี","นางสาวพัชรมัย  ไกรเสน","นางสาวสุพรรณิกา  กุออ"]},
+      {name:"6. งานประกันคุณภาพการศึกษา",head:"นางสาวกันจารัตน์  ใจหาญ",members:["นางสาวราตรี  มีชัย","นางสาวจีรนันท์  อนุรักษ์ธานี","นางสาวสุพรรณิกา  กุออ"]},
+      {name:"7. งานธุรการและสารบรรณ",head:"นางสาวนฤมล  เทพปณะ",members:[]},
+      {name:"8. งานพัสดุวิชาการ",head:"นางสาวพัชรมัย  ไกรเสน",members:["นางณัฐฐินันท์  น้อยมา"]},
+      {name:"9. งานนิเทศ กำกับ ติดตาม",head:"นางสาววรรณภรณ์  ทิพย์สอน",members:[]}
+    ]}
+  ]},
+student:{name:"กลุ่มบริหารงานกิจการนักเรียน",color:"#c62828",icon:"🎓",deputy:"นางสาววรันทร  มะณี",
+  assistants:["นายศรีมูล  สมบุตร"],
+  groups:[
+    {name:"กลุ่มงานส่งเสริมวินัยและคุณลักษณะ",head:"นายอนุพงศ์  ใจกว้าง",deputy:"นายเสรี  ชอบสุภาษิต",works:[
+      {name:"งานระเบียบวินัยและความประพฤติ",head:"นายอนุพงศ์  ใจกว้าง",members:["นางสาวอังศุมาลิน  สายเลิศ","ว่าที่ร้อยตรีหญิงกุลฐกรณ์  ใจกว้าง","นายบุญธรรม  อนันต์พิศาล","นายศักดิ์สิทธิ์  สุวรรณศรี"]},
+      {name:"งานส่งเสริมพฤติกรรมเชิงบวก",head:"นายเสรี  ชอบสุภาษิต",members:["นายพัสกร  วงค์ชรัตน์","นายศุภากร  ทาอวน","นายฐิติวัสส์  สุวิชา","นายบุญธรรม  อนันต์พิศาล"]},
+      {name:"งานปรับพฤติกรรม",head:"นายเชิดชู  ดำรงเกียรติพนา",members:["นายบุญธรรม  อนันต์พิศาล","นายนิพนธ์  จูเรือน"]},
+      {name:"งานส่งเสริมระเบียบแถว",head:"นายน่านมงคล  อินด้วง",members:["นายวรวิทย์  จาทอน","นายเสรี  ชอบสุภาษิต","นางสาวณัฐธิดา  แก้วคำศรี"]},
+      {name:"งานระเบียบทรงผม",head:"นายฐิติวัสส์  สุวิชา",members:["นายวรวิทย์  จาทอน","นายพัสกร  วงค์ชรัตน์","นายบุญธรรม  อนันต์พิศาล"]},
+      {name:"งานวินัยชาย",head:"นายอนุพงศ์  ใจกว้าง",members:["นายอัศนัย  กันงาม","ว่าที่ร้อยตรีธนวัฒน์  ฟองตา","นายวุฒิพงศ์  สกุลประกายพร"]},
+      {name:"งานวินัยหญิง",head:"นางสาวธนัญภรณ์  ธรรมใจ",members:["ว่าที่ร.ต.หญิงกุลฐภรณ์  ใจกว้าง","นางสาวพฤกษา  กองเจริญ","นางสาวอังศุมาลิน  สายเลิศ"]}
+    ]},
+    {name:"กลุ่มงานระบบดูแลช่วยเหลือนักเรียน",head:"นายวรวิทย์  จาทอน",deputy:"นายน่านมงคล  อินด้วง",works:[
+      {name:"งานระบบการดูแลช่วยเหลือ",head:"นางสาวสุชาดา  ดาเลา",members:["นางสาววันวิสาข์  อินทะวงค์"]},
+      {name:"งานเยี่ยมบ้าน",head:"นางสาววันวิสาข์  อินทะวงค์",members:["นางสาวสุชาดา  ดาเลา"]},
+      {name:"งานเครือข่ายผู้ปกครอง",head:"นางสาววันวิสาข์  อินทะวงค์",members:["นายบุญธรรม  อนันต์พิศาล","นายกิตติ์ธเนศ  นะที"]},
+      {name:"งานสถานศึกษาสีขาว",head:"นางสาวเมลาณี  บังคมเนตร",members:["นางสาวอังศุมาลิน  สายเลิศ","นายศรายุทธ  อินทสูตร"]},
+      {name:"งานพัฒนาคุณภาพชีวิตหอนอน",head:"นายน่านมงคล  อินด้วง",members:["นายวรวิทย์  จาทอน","นายวันชัย  มนตรีกฤษ์"]},
+      {name:"งานบริหารนักเรียนหอนอนชาย",head:"นายศรายุทธ  อินทสูตร",members:["นายนิพนธ์  จูเรือน","นายอาทิตย์  สิริปวีณกุล","นายบุญธรรม  อนันต์พิศาล"]},
+      {name:"งานบริหารนักเรียนหอนอนหญิง",head:"นางสาวนภาพัฏพ์  วงศ์กัน",members:["นางสาวธัญญารัตน์  เถินบุรินทร์","นางสาวทัศนา  สังฆสันติ","นางสาวศศิธร  กองจันทร์"]}
+    ]},
+    {name:"กลุ่มงานส่งเสริมคุณธรรมและประชาธิปไตย",head:"นายศรีมูล  สมบุตร",deputy:"",works:[
+      {name:"งานส่งเสริมคุณธรรม จริยธรรม",head:"นายศรีมูล  สมบุตร",members:["นายประวิทย์  เสาร์นุ","นายอธิคม  สุธรรม","นายบุญธรรม  อนันต์พิศาล"]},
+      {name:"งานส่งเสริมประชาธิปไตย",head:"นายอนุศิษฏ์  มะโนศิลา",members:["นายบุญเสริฐ  จตุรธรรมวาที","นายศรายุทธ  อินทสูตร"]},
+      {name:"งานพัฒนากิจกรรมสภานักเรียน",head:"นายอนุศิษฏ์  มะโนศิลา",members:["นายน่านมงคล  อินด้วง","นางสาวพฤกษา  กองเจริญ"]},
+      {name:"งานกิจกรรมพิเศษ",head:"นายอธิคม  สุธรรม",members:["นายประวิทย์  เสาร์นุ","นายอัศนัย  กันงาม"]},
+      {name:"งานทักษะดำรงชีวิต",head:"นายศรายุทธ  อินทสูตร",members:["นางสาวธัญญารัตน์  เถินบุรินทร์","นางสาวณัชณีย์  มอญตา","นายพัสกร  วงค์ชรัตน์"]},
+      {name:"งานอนามัยและส่งเสริมสุขภาพ",head:"นางสาวทัศนา  สังฆสันติ",members:["นางสาวณัฐธิดา  แก้วคำศรี","นางสาวธัญญารัตน์  เถินบุรินทร์","นางสาวพัชรมัย  ไกรเสน"]}
+    ]}
+  ]}
+}};
+
+/* ══ SYSTEM ═══════════════════════════════════════════════════════════════ */
+const SK='rp31_v4', PK='rp31_pw_v4';
+let D={}, UL=false, mCb=null;
+const DK=['general','plan','person','academic','student'];
+const TM={overview:0,orgchart:1,general:2,plan:3,person:4,academic:5,student:6,export:7,settings:8};
+
+function ld(){try{const r=localStorage.getItem(SK);if(r){D=JSON.parse(r);return;}}catch(e){}D=JSON.parse(JSON.stringify(DF));}
+function sv(){try{localStorage.setItem(SK,JSON.stringify(D));toast('✅ บันทึกข้อมูลเรียบร้อยแล้ว');}catch(e){alert('บันทึกไม่ได้: '+e.message);}}
+function getPw(){return localStorage.getItem(PK)||'rp31admin';}
+function toast(m,c='#80cbc4'){const t=document.getElementById('toast');t.textContent=m;t.style.borderColor=c;t.style.color=c;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2800);}
+function resetDef(){if(!UL){needLk();return;}if(!confirm('รีเซ็ตข้อมูลทั้งหมดกลับค่าเริ่มต้น?'))return;localStorage.removeItem(SK);ld();rAll();toast('↺ รีเซ็ตแล้ว');}
+ld();
+
+/* ── ADMIN LOCK ── */
+function togLock(){
+  if(UL){UL=false;updLk();toast('🔒 ล็อคการแก้ไขแล้ว');return;}
+  document.getElementById('pwI').value='';
+  document.getElementById('pwE').style.display='none';
+  document.getElementById('lkMod').classList.add('open');
+  setTimeout(()=>document.getElementById('pwI').focus(),200);
+}
+function chkPw(){
+  if(document.getElementById('pwI').value===getPw()){
+    UL=true;document.getElementById('lkMod').classList.remove('open');updLk();
+    toast('🔓 เข้าสู่ระบบ Admin สำเร็จ');rAll();
+  }else{document.getElementById('pwE').style.display='block';}
+}
+function closeLkMod(){document.getElementById('lkMod').classList.remove('open');}
+function updLk(){
+  const b=document.getElementById('lkBdg'),bt=document.getElementById('lkBtn');
+  if(UL){b.textContent='🔓 Admin';b.className='lkb ul';
+    bt.textContent='🔒 ล็อค';bt.className='btn blkbtn ul';}
+  else{b.textContent='🔒 ล็อค';b.className='lkb lk';
+    bt.textContent='🔑 แก้ไข';bt.className='btn blkbtn';}
+}
+function needLk(){toast('🔒 ต้องล็อกอิน Admin ก่อนแก้ไข','#ef9a9a');}
+function chgPw(){
+  const o=document.getElementById('pwO').value,n=document.getElementById('pwN').value,
+        c2=document.getElementById('pwC').value,m=document.getElementById('pwM');
+  if(o!==getPw()){m.style.display='block';m.style.color='#ef9a9a';m.textContent='รหัสผ่านปัจจุบันไม่ถูกต้อง';return;}
+  if(n.length<4){m.style.display='block';m.style.color='#ef9a9a';m.textContent='รหัสผ่านใหม่ต้องมีอย่างน้อย 4 ตัวอักษร';return;}
+  if(n!==c2){m.style.display='block';m.style.color='#ef9a9a';m.textContent='รหัสผ่านใหม่ไม่ตรงกัน';return;}
+  localStorage.setItem(PK,n);m.style.display='block';m.style.color='#80cbc4';
+  m.textContent='✅ เปลี่ยนรหัสผ่านสำเร็จ';
+  ['pwO','pwN','pwC'].forEach(id=>document.getElementById(id).value='');
+}
+
+/* ── STATS ── */
+function calcStats(){
+  let tg=0,tw=0,ns=new Set();
+  DK.forEach(k=>{D.departments[k].groups.forEach(g=>{tg++;g.works.forEach(w=>{tw++;
+    if(w.head)ns.add(w.head.trim());
+    w.members.forEach(m=>{if(m&&m.length>2&&!m.includes('คณะ')&&!m.includes('แผนงาน')&&
+      !m.includes('สารสนเทศ')&&!m.includes('พัสดุ'))ns.add(m.trim());});
+  });});});
+  document.getElementById('s-grp').textContent=tg;
+  document.getElementById('s-wrk').textContent=tw;
+  document.getElementById('s-per').textContent=ns.size+'+';
+}
+
+/* ── RENDER ALL ── */
+function rAll(){
+  document.getElementById('dirNm').textContent=D.director;
+  rDepRow();rOv();DK.forEach(k=>rDept(k));calcStats();
+  if(document.getElementById('cp-orgchart').classList.contains('active'))buildOC();
+}
+
+/* ── DEPUTY ROW ── */
+function rDepRow(){
+  document.getElementById('depRow').innerHTML=DK.map(k=>{
+    const d=D.departments[k];const as=d.assistants||[];
+    return`<div class="dpc d-${k}" onclick="swTK('${k}')">
+      <div class="rl">รองผู้อำนวยการ</div>
+      <div class="nm">${d.deputy}</div>
+      <div class="dp">${d.icon} ${d.name}</div>
+      ${as.length?`<div class="as">ผช.ผอ.:<br>${as.join('<br>')}</div>`:''}
+    </div>`;
+  }).join('');
+}
+
+/* ── OVERVIEW ── */
+function rOv(){
+  document.getElementById('cp-overview').innerHTML=`
+  <div class="gcg" style="margin-top:12px;">${DK.map(k=>{
+    const d=D.departments[k];const wc=d.groups.reduce((s,g)=>s+g.works.length,0);
+    return`<div class="gc d-${k}" style="border-top:3px solid ${d.color}">
+      <div class="gch" style="background:rgba(0,0,0,.22)">
+        <div class="gi" style="background:${d.color}22;color:${d.color}">${d.icon}</div>
+        <div style="flex:1"><h3>${d.name}</h3><div class="ld">รองผอ. ${d.deputy}</div></div>
+        <span class="bdg bbl">${wc} งาน</span>
+      </div>
+      <div class="tree" style="max-height:180px;overflow-y:auto">
+        ${d.groups.map(g=>`<div>
+          <div class="tr" onclick="togTr(this)">
+            <div class="ttog">▶</div>
+            <div style="flex:1"><div class="tl" style="font-weight:600">${g.name}</div>
+            <div class="tm">หัวหน้า: ${g.head}</div></div>
+            <span class="bdg bgo">${g.works.length}</span>
+          </div>
+          <div class="tchd">${g.works.map(w=>`<div class="tr"
+            onclick="showMem('${escQ(w.name)}','${escQ(w.head)}',${JSON.stringify(w.members).replace(/"/g,'&quot;')})">
+            <div style="width:10px;text-align:center;font-size:7px;color:var(--mu)">•</div>
+            <div style="flex:1"><div class="tl">${w.name}</div><div class="tm">${w.head}</div></div>
+          </div>`).join('')}</div>
+        </div>`).join('')}
+      </div>
+    </div>`;
+  }).join('')}</div>`;
+}
+
+/* ── DEPT PANELS ── */
+function rDept(k){
+  const d=D.departments[k];
+  document.getElementById('cp-'+k).innerHTML=`
+  <div style="margin:12px 0 9px;display:flex;align-items:center;gap:7px;flex-wrap:wrap;">
+    <h2 style="font-family:'Kanit',sans-serif;font-size:15px;color:${d.color}">${d.icon} ${d.name}</h2>
+    <span style="background:rgba(255,255,255,.05);border:1px solid var(--br);padding:2px 7px;border-radius:5px;font-size:9.5px">
+      รองผอ. <b style="color:var(--wh)">${d.deputy}</b></span>
+    ${(d.assistants||[]).map(a=>`<span style="background:rgba(255,255,255,.05);border:1px solid var(--br);padding:2px 7px;border-radius:5px;font-size:9.5px">ผช.ผอ. <b style="color:var(--wh)">${a}</b></span>`).join('')}
+    ${UL?`<button class="btn bp bsm" onclick="addGrp('${k}')">+ เพิ่มกลุ่มงาน</button>
+    <button class="btn bo bsm" onclick="edDH('${k}')">✏️ แก้ไขหัวหน้า</button>`:''}
+  </div>
+  <div class="gcg">${d.groups.map((g,gi)=>`
+    <div class="gc" style="border-top:3px solid ${d.color}">
+      <div class="gch" style="background:${d.color}12">
+        <div class="gi" style="background:${d.color}20;color:${d.color}">${d.icon}</div>
+        <div style="flex:1"><h3>${g.name}</h3>
+          <div class="ld">หัวหน้า: ${g.head}${g.deputy?' | รอง: '+g.deputy:''}</div></div>
+        ${UL?`<div style="display:flex;gap:2px">
+          <button class="btn bo bsm" onclick="edGrp('${k}',${gi})">✏️</button>
+          <button class="btn brd bsm" onclick="delGrp('${k}',${gi})">🗑️</button>
+        </div>`:''}
+      </div>
+      <div class="tree">${g.works.map((w,wi)=>`
+        <div class="tr">
+          <div style="width:10px;text-align:center;font-size:10px;color:${d.color}">◆</div>
+          <div style="flex:1" onclick="showMem('${escQ(w.name)}','${escQ(w.head)}',${JSON.stringify(w.members).replace(/"/g,'&quot;')})">
+            <div class="tl" style="font-weight:500">${w.name}</div>
+            <div class="tm">หัวหน้างาน: ${w.head}${w.members.length?' • คณะทำงาน '+w.members.length+' คน':''}</div>
+          </div>
+          ${UL?`<div style="display:flex;gap:2px">
+            <button class="btn bo bsm" onclick="edWk('${k}',${gi},${wi})" style="font-size:8.5px">✏️</button>
+            <button class="btn brd bsm" onclick="delWk('${k}',${gi},${wi})" style="font-size:8.5px">🗑️</button>
+          </div>`:''}
+        </div>`).join('')}
+        ${UL?`<span class="addb" onclick="addWk('${k}',${gi})">＋ เพิ่มงาน</span>`:''}
+      </div>
+    </div>`).join('')}</div>`;
+}
+
+/* ══ ORG CHART (no-overlap layout) ═══════════════════════════════════════ */
+function buildOC(){
+  const depth=parseInt(document.getElementById('ocd').value);
+  const filt=document.getElementById('ocf').value;
+  const cv=document.getElementById('ocCanvas');cv.innerHTML='';
+  const keys=filt==='all'?DK:[filt];
+
+  /* layout constants — wider nodes, larger gaps to prevent overlap */
+  const NW=160, NH=58, GAP_X=16, GAP_Y=20, PAD=24;
+  const ROW_DIR_DEP=90, ROW_DEP_GRP=84, ROW_GRP_WRK=78;
+  const WRK_W=136, WRK_H=50, WRK_COLS=3, WRK_GAP_X=10, WRK_GAP_Y=8;
+
+  const nodes=[], edges=[];
+
+  /* ── Level 0: Director ── */
+  const totalDepW=keys.length*(NW+GAP_X)-GAP_X;
+  const dirW=NW+60, dirX=PAD+totalDepW/2-dirW/2;
+  const dirY=PAD;
+  nodes.push({id:'dir',x:dirX,y:dirY,w:dirW,h:NH,
+    cls:'dir',role:'ผู้อำนวยการโรงเรียน',name:D.director,sub:'',color:null,assts:[]});
+
+  /* ── Level 1: Deputies ── */
+  const dm={};
+  keys.forEach((k,ki)=>{
+    const dep=D.departments[k];
+    const as=dep.assistants||[];
+    const depH=NH+(as.length>0?as.length*14+6:0);
+    const x=PAD+ki*(NW+GAP_X), y=dirY+ROW_DIR_DEP;
+    const n={id:'d'+k,x,y,w:NW,h:depH,
+      cls:'dep',role:'รองผู้อำนวยการ',name:dep.deputy,
+      sub:dep.icon+' '+dep.name.replace('กลุ่มบริหาร','').replace('งาน',''),
+      color:dep.color,dkey:k,assts:as};
+    nodes.push(n);dm[k]=n;
+    edges.push({f:'dir',t:'d'+k,c:dep.color,dash:false});
+  });
+
+  /* ── Level 2: Groups + Level 3: Works ── */
+  keys.forEach(k=>{
+    const dep=D.departments[k];const dn=dm[k];
+    const gc=dep.groups.length;
+
+    /* Calculate total width needed for all groups + their works */
+    /* For each group, find max works in a "column stack" */
+    dep.groups.forEach((g,gi)=>{
+      const wc=g.works.length;
+
+      /* Group position: center under deputy, spread by group index */
+      const grpSpread=(gc>1)?NW+GAP_X:0;
+      const grpTotalW=gc*(NW+GAP_X)-GAP_X;
+      const grpOffsetX=(gi-(gc-1)/2)*(NW+GAP_X);
+      const gx=dn.x+dn.w/2-NW/2+grpOffsetX;
+      const gy=dn.y+dn.h+ROW_DEP_GRP;
+      const gid='g_'+k+'_'+gi;
+
+      nodes.push({id:gid,x:gx,y:gy,w:NW,h:NH,
+        cls:'grp',role:'หัวหน้ากลุ่มงาน',name:g.head,sub:g.name,color:dep.color});
+      edges.push({f:'d'+k,t:gid,c:dep.color,dash:false});
+
+      if(depth>=3 && wc>0){
+        const cols=Math.min(wc,WRK_COLS);
+        const rows=Math.ceil(wc/cols);
+        const blockW=cols*(WRK_W+WRK_GAP_X)-WRK_GAP_X;
+        const blockStartX=gx+NW/2-blockW/2;
+
+        g.works.forEach((w,wi)=>{
+          const col=wi%cols, row=Math.floor(wi/cols);
+          const wx=blockStartX+col*(WRK_W+WRK_GAP_X);
+          const wy=gy+NH+ROW_GRP_WRK+row*(WRK_H+WRK_GAP_Y);
+          const wid='w_'+k+'_'+gi+'_'+wi;
+          nodes.push({id:wid,x:wx,y:wy,w:WRK_W,h:WRK_H,
+            cls:'work',role:'หัวหน้างาน',name:w.head,sub:w.name,
+            color:dep.color,wn:w.name,mem:w.members});
+          edges.push({f:gid,t:wid,c:dep.color,dash:true});
+        });
+      }
+    });
+  });
+
+  /* ── Canvas size ── */
+  let mx=0,my=0;
+  nodes.forEach(n=>{mx=Math.max(mx,n.x+n.w+PAD);my=Math.max(my,n.y+n.h+PAD*2);});
+  cv.style.width=mx+'px';cv.style.height=my+'px';
+
+  /* ── SVG edges ── */
+  const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+  svg.setAttribute('class','oc-svg');
+  svg.style.cssText=`position:absolute;top:0;left:0;width:${mx}px;height:${my}px;pointer-events:none;overflow:visible;`;
+  const nm={};nodes.forEach(n=>nm[n.id]=n);
+  edges.forEach(e=>{
+    const f=nm[e.f],t=nm[e.t];if(!f||!t)return;
+    const x1=f.x+f.w/2, y1=f.y+f.h;
+    const x2=t.x+t.w/2, y2=t.y;
+    const mid=(y1+y2)/2;
+    const p=document.createElementNS('http://www.w3.org/2000/svg','path');
+    p.setAttribute('d',`M${x1},${y1} C${x1},${mid} ${x2},${mid} ${x2},${y2}`);
+    p.setAttribute('stroke',e.c||'rgba(21,101,192,0.4)');
+    p.setAttribute('stroke-width','1.5');p.setAttribute('fill','none');
+    if(e.dash)p.setAttribute('stroke-dasharray','5,3');
+    svg.appendChild(p);
+  });
+  cv.appendChild(svg);
+
+  /* ── DOM nodes ── */
+  nodes.forEach(n=>{
+    const el=document.createElement('div');
+    el.className='ocn '+n.cls;
+    const bgColor=n.cls==='dir'?'rgba(212,160,23,0.1)':
+      n.cls==='work'?'rgba(12,30,48,0.95)':'rgba(13,28,45,0.98)';
+    el.style.cssText=`left:${n.x}px;top:${n.y}px;width:${n.w}px;
+      min-height:${n.h}px;background:${bgColor};`;
+    if(n.color){
+      if(n.cls==='dep')el.style.borderTopColor=n.color;
+      if(n.cls==='grp')el.style.borderTopColor=n.color;
+      if(n.cls==='work')el.style.borderColor=n.color+'44';
+    }
+    let html=`<div class="oc-role">${n.role}</div><div class="oc-nm">${n.name}</div>`;
+    if(n.sub)html+=`<div class="oc-sub">${n.sub}</div>`;
+    if(n.assts&&n.assts.length){
+      html+=`<div class="oc-assts">${n.assts.map(a=>`<div class="oc-asst-row">ผช.ผอ. ${a}</div>`).join('')}</div>`;
+    }
+    el.innerHTML=html;
+    if(n.wn){el.style.cursor='pointer';el.title='คลิกดูคณะทำงาน';
+      el.onclick=()=>showMem(n.wn,n.name,n.mem||[]);}
+    else if(n.dkey){el.style.cursor='pointer';el.onclick=()=>swTK(n.dkey);}
+    cv.appendChild(el);
+  });
+}
+
+/* ── Export OC as PNG ── */
+function exportOCPng(){
+  const filt=document.getElementById('ocf').value;
+  exportOCPngFilt(filt);
+}
+function exportOCPngFromPanel(){
+  const filt=document.getElementById('expOCFilt').value;
+  document.getElementById('ocf').value=filt;
+  buildOC();
+  swTK('orgchart');
+  setTimeout(()=>exportOCPngFilt(filt),500);
+}
+function exportOCPngFilt(filt){
+  const cv=document.getElementById('ocCanvas');
+  if(!cv.children.length){toast('กรุณาไปที่ Org Chart ก่อน','#ef9a9a');return;}
+  // Use html2canvas-like approach via SVG foreignObject trick
+  const w=cv.offsetWidth||1200, h=cv.offsetHeight||800;
+  const svgStr=`<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}">
+    <rect width="${w}" height="${h}" fill="#05101c"/>
+    <foreignObject width="${w}" height="${h}">
+      <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:sans-serif;font-size:10px;color:#c8dff0;position:relative;width:${w}px;height:${h}px;">
+        ${cv.innerHTML}
+      </div>
+    </foreignObject>
+  </svg>`;
+  const blob=new Blob([svgStr],{type:'image/svg+xml'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download=`org_chart_${filt}_rp31.svg`;a.click();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+  toast('📥 บันทึก SVG สำเร็จ');
+}
+
+/* ══ EXCEL EXPORT ═══════════════════════════════════════════════════════════ */
+function exportAllExcel(){buildExcel(DK,'โครงสร้างการบริหารงาน_รร31_ทุกกลุ่ม');}
+function exportSelectedExcel(){
+  const sel=document.getElementById('expDeptSel').value;
+  const keys=sel==='all'?DK:[sel];
+  const name=sel==='all'?'โครงสร้างการบริหารงาน_รร31_ทุกกลุ่ม':'โครงสร้าง_'+D.departments[sel].name;
+  buildExcel(keys,name);
+}
+function buildExcel(keys, fname){
+  if(!window.XLSX){toast('กรุณารอโหลด XLSX library...','#ef9a9a');return;}
+  const wb=XLSX.utils.book_new();
+  const SCHOOL='โรงเรียนราชประชานุเคราะห์ 31 จังหวัดเชียงใหม่';
+  const ORDER_REF='คำสั่งที่ 247/2568  ปีการศึกษา 2569';
+
+  // Summary sheet
+  const sumRows=[
+    [SCHOOL,'','',''],
+    [ORDER_REF,'','',''],
+    ['ผู้อำนวยการโรงเรียน : '+D.director,'','',''],
+    ['','','',''],
+    ['กลุ่มบริหาร','กลุ่มงาน','งาน','หัวหน้างาน'],
+  ];
+  keys.forEach(k=>{
+    const dep=D.departments[k];
+    dep.groups.forEach((g,gi)=>{
+      g.works.forEach((w,wi)=>{
+        sumRows.push([
+          gi===0&&wi===0?dep.name:'',
+          wi===0?g.name:'',
+          w.name,w.head,
+          w.members.join(' / ')
+        ]);
+      });
+    });
+    sumRows.push(['','','','']);
+  });
+  const wsSumm=XLSX.utils.aoa_to_sheet(sumRows);
+  wsSumm['!cols']=[{wch:32},{wch:30},{wch:30},{wch:22},{wch:40}];
+  XLSX.utils.book_append_sheet(wb,wsSumm,'ภาพรวมทั้งหมด');
+
+  // Per-dept sheets
+  keys.forEach(k=>{
+    const dep=D.departments[k];
+    const rows=[
+      [SCHOOL,'','',''],
+      [ORDER_REF,'','',''],
+      [dep.name,'','',''],
+      ['ผู้อำนวยการโรงเรียน : '+D.director,'','',''],
+      ['รองผู้อำนวยการ : '+dep.deputy,'','',''],
+      ...(dep.assistants||[]).map(a=>['ผู้ช่วยผู้อำนวยการ : '+a,'','','']),
+      ['','','',''],
+      ['กลุ่มงาน','งาน','หัวหน้างาน','คณะทำงาน'],
+    ];
+    dep.groups.forEach(g=>{
+      g.works.forEach((w,wi)=>{
+        rows.push([
+          wi===0?g.name+(g.deputy?'\nรอง: '+g.deputy:''):'',
+          w.name,w.head,
+          w.members.join(' / ')||'-'
+        ]);
+      });
+    });
+    const ws=XLSX.utils.aoa_to_sheet(rows);
+    ws['!cols']=[{wch:30},{wch:36},{wch:22},{wch:40}];
+    XLSX.utils.book_append_sheet(wb,ws,dep.name.slice(0,31));
+  });
+
+  XLSX.writeFile(wb,fname+'.xlsx');
+  toast('📊 Export Excel สำเร็จ!');
+}
+
+/* ══ PRINT ═══════════════════════════════════════════════════════════════ */
+function doPrint(){swTK('orgchart');setTimeout(()=>window.print(),450);}
+function doPrintDept(){
+  const sel=document.getElementById('printDeptSel').value;
+  if(sel==='all'){doPrint();return;}
+  swTK(sel);setTimeout(()=>window.print(),350);
+}
+
+/* ══ SEARCH ═════════════════════════════════════════════════════════════ */
+function doSearch(q){
+  const box=document.getElementById('srd');
+  if(!q.trim()){box.classList.remove('open');return;}
+  const ql=q.toLowerCase(),res=[];
+  DK.forEach(k=>{const d=D.departments[k];d.groups.forEach(g=>{
+    if(g.head.toLowerCase().includes(ql))res.push({name:g.head,role:'หัวหน้ากลุ่มงาน',path:d.name+' › '+g.name,key:k});
+    g.works.forEach(w=>{
+      if(w.name.toLowerCase().includes(ql))res.push({name:w.name,role:'ชื่องาน',path:d.name+' › '+g.name,key:k});
+      if(w.head.toLowerCase().includes(ql))res.push({name:w.head,role:'หัวหน้างาน: '+w.name,path:d.name+' › '+g.name,key:k});
+      w.members.forEach(m=>{if(m&&m.toLowerCase().includes(ql))res.push({name:m,role:'คณะทำงาน: '+w.name,path:d.name+' › '+g.name,key:k});});
+    });
+  });});
+  const seen=new Set();
+  const u=res.filter(r=>{const kk=r.name+'|'+r.path;if(seen.has(kk))return false;seen.add(kk);return true;}).slice(0,10);
+  box.innerHTML=u.length?u.map(r=>`<div class="sri" onclick="goSR('${r.key}','${escQ(r.name)}')">
+    <div class="sn2">${hl(r.name,ql)}</div>
+    <div class="sr2">${r.role}</div><div class="sp">${r.path}</div>
+  </div>`).join(''):'<div class="sr-none">ไม่พบผลลัพธ์</div>';
+  box.classList.add('open');
+}
+function hl(t,q){const i=t.toLowerCase().indexOf(q);if(i<0)return t;
+  return t.slice(0,i)+`<mark style="background:rgba(240,192,64,.32);color:var(--wh);border-radius:2px">${t.slice(i,i+q.length)}</mark>`+t.slice(i+q.length);}
+function goSR(k,nm){hideSR();swTK(k);setTimeout(()=>{
+  document.querySelectorAll('.tl,.tm').forEach(el=>{
+    if(el.textContent.includes(nm)){
+      const r=el.closest('.tr');if(!r)return;
+      r.classList.add('hl');r.scrollIntoView({behavior:'smooth',block:'center'});
+      setTimeout(()=>r.classList.remove('hl'),2500);
+    }
+  });
+},350);}
+function hideSR(){document.getElementById('srd').classList.remove('open');document.getElementById('si-inp').value='';}
+
+/* ══ TABS ═══════════════════════════════════════════════════════════════ */
+function swT(k,el){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');
+  document.querySelectorAll('.cp').forEach(p=>p.classList.remove('active'));
+  document.getElementById('cp-'+k).classList.add('active');
+  if(k==='orgchart')buildOC();
+}
+function swTK(k){
+  const tabs=document.querySelectorAll('.tab');tabs.forEach(t=>t.classList.remove('active'));
+  if(TM[k]!==undefined)tabs[TM[k]].classList.add('active');
+  document.querySelectorAll('.cp').forEach(p=>p.classList.remove('active'));
+  document.getElementById('cp-'+k).classList.add('active');
+  if(k==='orgchart')buildOC();
+}
+function togTr(r){const t=r.querySelector('.ttog');const c=r.nextElementSibling;
+  if(c?.classList.contains('tchd')){c.classList.toggle('open');t.textContent=c.classList.contains('open')?'▼':'▶';}}
+
+/* ══ POPUP ══════════════════════════════════════════════════════════════ */
+function showMem(n,h,m){
+  document.getElementById('pt').textContent=n;
+  document.getElementById('ps').textContent='หัวหน้างาน: '+h;
+  const ma=typeof m==='string'?JSON.parse(m):(m||[]);
+  document.getElementById('pm').innerHTML=
+    `<div style="margin-bottom:6px"><span class="chip h">${h} (หัวหน้างาน)</span></div>`+
+    (ma.length?`<div><b style="font-size:8.5px;color:var(--mu)">คณะทำงาน (${ma.length} คน):</b><br>
+      ${ma.map(x=>`<span class="chip">${x}</span>`).join('')}</div>`:
+    '<div style="color:var(--mu);font-size:9.5px">ไม่มีคณะทำงานเพิ่มเติม</div>');
+  document.getElementById('mpop').classList.add('open');
+}
+
+/* ══ MODALS ═════════════════════════════════════════════════════════════ */
+function openMod(t,b,cb){document.getElementById('emT').textContent=t;document.getElementById('emB').innerHTML=b;mCb=cb;document.getElementById('em').classList.add('open');}
+function closeMod(){document.getElementById('em').classList.remove('open');}
+function savMod(){if(mCb)mCb();}
+function aSave(k){sv();rDepRow();rOv();if(k)rDept(k);
+  if(document.getElementById('cp-orgchart').classList.contains('active'))buildOC();
+  calcStats();closeMod();}
+
+function edDir(){if(!UL){needLk();return;}
+  openMod('แก้ไขชื่อผู้อำนวยการ',`<label>ชื่อ-นามสกุล</label><input id="fd" value="${D.director}">`,
+  ()=>{D.director=document.getElementById('fd').value;document.getElementById('dirNm').textContent=D.director;aSave(null);});}
+
+function edDH(k){if(!UL){needLk();return;}const d=D.departments[k];
+  openMod('แก้ไขหัวหน้ากลุ่มบริหาร',
+  `<label>ชื่อรองผู้อำนวยการ</label><input id="fd1" value="${d.deputy}">
+   <label>ผู้ช่วยผู้อำนวยการ (คั่นด้วย ,)</label><textarea id="fd2">${(d.assistants||[]).join(',')}</textarea>`,
+  ()=>{D.departments[k].deputy=document.getElementById('fd1').value;
+    D.departments[k].assistants=document.getElementById('fd2').value.split(',').map(s=>s.trim()).filter(Boolean);
+    aSave(k);});}
+
+function edGrp(k,gi){if(!UL){needLk();return;}const g=D.departments[k].groups[gi];
+  openMod('แก้ไขกลุ่มงาน',
+  `<label>ชื่อกลุ่มงาน</label><input id="fn" value="${g.name}">
+   <label>หัวหน้ากลุ่มงาน</label><input id="fh" value="${g.head}">
+   <label>รองหัวหน้ากลุ่มงาน</label><input id="fdp" value="${g.deputy||''}">`,
+  ()=>{D.departments[k].groups[gi]={...g,name:document.getElementById('fn').value,head:document.getElementById('fh').value,deputy:document.getElementById('fdp').value};aSave(k);});}
+
+function addGrp(k){if(!UL){needLk();return;}
+  openMod('เพิ่มกลุ่มงานใหม่',
+  `<label>ชื่อกลุ่มงาน</label><input id="fn" placeholder="ชื่อกลุ่มงาน">
+   <label>หัวหน้ากลุ่มงาน</label><input id="fh" placeholder="ชื่อ-นามสกุล">
+   <label>รองหัวหน้า</label><input id="fdp" placeholder="ถ้ามี">`,
+  ()=>{const n=document.getElementById('fn').value.trim();if(!n)return alert('กรุณาระบุชื่อกลุ่มงาน');
+    D.departments[k].groups.push({name:n,head:document.getElementById('fh').value,deputy:document.getElementById('fdp').value,works:[]});aSave(k);});}
+
+function delGrp(k,gi){if(!UL){needLk();return;}if(!confirm('ลบกลุ่มงานนี้?'))return;
+  D.departments[k].groups.splice(gi,1);aSave(k);}
+
+function edWk(k,gi,wi){if(!UL){needLk();return;}const w=D.departments[k].groups[gi].works[wi];
+  openMod('แก้ไขงาน',
+  `<label>ชื่องาน</label><input id="fn" value="${w.name}">
+   <label>หัวหน้างาน</label><input id="fh" value="${w.head}">
+   <label>คณะทำงาน (คั่นด้วย ,)</label><textarea id="fm">${w.members.join(',')}</textarea>`,
+  ()=>{D.departments[k].groups[gi].works[wi]={name:document.getElementById('fn').value,head:document.getElementById('fh').value,
+    members:document.getElementById('fm').value.split(',').map(s=>s.trim()).filter(Boolean)};aSave(k);});}
+
+function addWk(k,gi){if(!UL){needLk();return;}
+  openMod('เพิ่มงานใหม่',
+  `<label>ชื่องาน</label><input id="fn" placeholder="ชื่องาน">
+   <label>หัวหน้างาน</label><input id="fh" placeholder="ชื่อ-นามสกุล">
+   <label>คณะทำงาน (คั่นด้วย ,)</label><textarea id="fm" placeholder="ชื่อ1, ชื่อ2, ..."></textarea>`,
+  ()=>{const n=document.getElementById('fn').value.trim();if(!n)return alert('กรุณาระบุชื่องาน');
+    D.departments[k].groups[gi].works.push({name:n,head:document.getElementById('fh').value,
+      members:document.getElementById('fm').value.split(',').map(s=>s.trim()).filter(Boolean)});aSave(k);});}
+
+function delWk(k,gi,wi){if(!UL){needLk();return;}if(!confirm('ลบงานนี้?'))return;
+  D.departments[k].groups[gi].works.splice(wi,1);aSave(k);}
+
+/* ══ EXPORT/IMPORT ══════════════════════════════════════════════════════ */
+function doExp(){const b=new Blob([JSON.stringify(D,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(b);
+  a.download='org_rp31_'+new Date().toISOString().slice(0,10)+'.json';a.click();}
+function doImp(inp){const f=inp.files[0];if(!f)return;const r=new FileReader();
+  r.onload=e=>{try{const p=JSON.parse(e.target.result);
+    if(!p.director||!p.departments){alert('ไฟล์ JSON ไม่ถูกต้อง');return;}
+    D=p;sv();rAll();toast('📤 นำเข้าข้อมูลเรียบร้อย');}
+  catch(err){alert('เกิดข้อผิดพลาด: '+err.message);}};r.readAsText(f);inp.value='';}
+
+function escQ(s){return(s||'').replace(/\\/g,'\\\\').replace(/'/g,"\\'");}
+
+/* ── INIT ── */
+rAll();
+</script>
+</body>
+</html>
